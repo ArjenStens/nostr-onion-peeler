@@ -39,7 +39,7 @@ docker save stensdev-site > stensdev-site.tar
 ### Publish
 
 ```bash
-npx nsite-cli@0.1.9 upload . --purge -v -k nsec1gft87w7t2lngwvzgtuvgfvwa450kzhyux5x5rlamyamztj8x77csvuv862  
+npx nsite-cli@0.1.9 upload . --purge -v -k nsec...  
 ```
 
 
