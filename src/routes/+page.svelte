@@ -1,4 +1,13 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
+	export async function load({ }) {
+		if (browser) {
+			if(location.protocol === 'http:') {
+				location.protocol = 'https:';
+			}
+		}
+	}
+
 
 	import {decrypt, getConversationKey} from 'nostr-tools/nip44'
 	import {NPool, NRelay1, NSecSigner} from "@jsr/nostrify__nostrify";
@@ -19,7 +28,9 @@
 	let chestNuts: Writable<Map<string, object>> = writable(new Map<string, object>());
 
 	const relays = [
-		'wss://nostrue.com'
+		'wss://nostrue.com',
+		'wss://nostr.cercatrova.me',
+		'wss://relay.damus.io'
 	];
 	const pool = new NPool({
 		open(url) {
@@ -94,7 +105,7 @@
 		const qrUrl = await toQrUrl(cashuToken)
 		chestNuts.update(cn => cn.set(cashuToken, {event: event, qrUrl: qrUrl, token: cashuToken}))
 
-		await delay(Math.random() * 1500)
+		// await delay(Math.random() * 1500)
 		await publishEvent(JSON.parse(decryptedContent))
 	}
 
